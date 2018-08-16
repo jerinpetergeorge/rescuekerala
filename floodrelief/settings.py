@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'django_filters',
     'raven.contrib.django.raven_compat',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -185,3 +186,8 @@ STATICFILES_DIRS = (
 )
 
 ADMIN_SITE_HEADER = "Keralarescue Dashboard"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
+}

@@ -5,6 +5,10 @@ from django.views.generic.base import TemplateView
 from .models import Request, Volunteer, DistrictManager, Contributor, DistrictNeed
 import django_filters
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from rest_framework import viewsets
+from mainapp.filters import RequestAPIFilter
+from django_filters import rest_framework as filters
+from mainapp.serializers import RequestFetchSerializer
 
 class CreateRequest(CreateView):
     model = Request
@@ -116,3 +120,10 @@ def districtmanager_list(request):
 
 class Maintenance(TemplateView):
     template_name = "mainapp/maintenance.html"
+
+
+class RequestFetchAPI(viewsets.ModelViewSet):
+    queryset = Request.objects.all()
+    serializer_class = RequestFetchSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = RequestAPIFilter
